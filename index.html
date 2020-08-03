@@ -50,19 +50,21 @@
             </div>
         </div>
         <div class="notify-section">
-            <p class="notify" id="not-matched">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify" id="matched">✅ Pin Matched... Secret door is opening for you</p>
+            <p class="notify wrong">❌ Pin Didn't Match, Please try again</p>
+            <p class="notify right">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
 
-    <!-- Added JS by Me -->
     <script>
+
+        // Generating 4 Digit Pin Randomly
         var generatePinBtn = document.getElementById('generate-pin');
         generatePinBtn.addEventListener('click',function(){
             var generateArea = document.getElementById('generate-area');
             generateArea.value = parseInt(Math.floor(Math.random() * 9000 + 1000));
             });
 
+        // Getting input value of Numbers, Backspace & ClearAll button
         function getInput(i) {
             if (i == 'C') {
                     document.getElementById('display-value').value = '';
@@ -75,20 +77,25 @@
                     document.getElementById('display-value').value += i;
                 }
             }
+
+        // Matching generated pin & input value
         var submitButton = document.getElementById('submit-button');
         submitButton.addEventListener('click', function () {
             var displayArea = document.getElementById('display-value');
             var generateArea = document.getElementById('generate-area');
             if (generateArea.value == displayArea.value) {
-                console.log('yes');
-                // var matchedPassword = document.getElementById('matched');
-                // style.display.matchedPassword = 'block';
-            }
-            else {
-                console.log('no');
-            }
-            
-        })
+                   document.querySelector(".notify-section").style.display="block";
+                   document.querySelector(".right").style.display= "block";
+                   document.querySelector(".wrong").style.display= "none";
+
+                }
+
+                else{
+                    document.querySelector(".notify-section .wrong").style.display="block";
+                    document.querySelector(".wrong").style.display ="block";
+                    document.querySelector(".right").style.display ="none";
+                }
+        });
 
     </script>
 </body>
